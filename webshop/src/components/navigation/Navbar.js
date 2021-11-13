@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom';
+import ShoppingCart from '../shoppingCart/ShoppingCart';
 
 
 const Navbar = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-info">
+      <nav className="navbar navbar-expand-lg ">
         <div className="container">
           <Link className="navbar-brand" to="/">LOGO</Link>
 
@@ -45,7 +46,7 @@ const Navbar = () => {
                  <i className="fas fa-shopping-cart"></i>
                 </span>
                 <ul className="dropdown-menu dropdown-menu-end shopping-cart" aria-labelledby="navbarDropdownMenuLink">
-                    SHOPPINGCART
+                    <ShoppingCart />
                 </ul>
               </li>
 
