@@ -15,7 +15,7 @@ const Products = () => {
   }, [dispatch])
 
   return (
-    <div className="roww row-cols-sm-2 row-cols-md-3 ">
+    <div className="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 ">
       {
         productCatalog && productCatalog.map(product => (
           <ProductCard key={product.id} product={product} />

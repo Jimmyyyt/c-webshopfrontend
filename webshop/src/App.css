@@ -3,6 +3,12 @@
   width: 100px;
 } */
 
+.invalid-field {
+  border-color: #dc3545;
+  color: #dc3545;
+  background-color: #ffffff;
+}
+
 .shopping-cart {
   min-width: 500px;
 }

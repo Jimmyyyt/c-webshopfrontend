@@ -28,7 +28,7 @@ const ProductDetails = () => {
       </div>
       <div className="coll-2">
         {/* <p>{product.subCategory.name}</p> */}
-        <h1>{product.name}</h1>
+        <h2>{product.name}</h2>
         <h4>{product.price}:-</h4>
         <input type="number" value="1" />
         <button className="btnn btnn-explore">Add To Cart</button>
