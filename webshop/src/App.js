@@ -4,7 +4,6 @@ import Navbar from './components/navigation/Navbar';
 import Home from './views/Home';
 import Products from './views/Products';
 import ProductDetails from './views/ProductDetails';
-import AddProduct from './components/products/AddProduct';
 import CreateProduct from './views/CreateProduct';
 
 
