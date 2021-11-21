@@ -37,11 +37,9 @@ const CreateProduct = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-
         let newProduct = {
           name: values.name,
           description: values.description,
-
           price: values.price,
           imageUrl: values.imageUrl,
           subCategoryId: values.subCategoryId
@@ -54,10 +52,10 @@ const CreateProduct = () => {
       }
 
       return (
-        <div className="reg-new-product mt-5">
+        <div className=" mt-5">
           <form className="col-6 m-auto p-3 mb-5 " id="formReg" onSubmit={submitHandler}>
             <div className="text-center ">
-                    <h2 className="m-auto mb-3 pb-2 add-new-product col-7">Create New Product</h2>
+                    <h2 className="m-auto mb-3 pb-2  col-7">Create New Product</h2>
             </div>
             <div className="row mb-3">
               <div className="col-6">
@@ -95,8 +93,6 @@ const CreateProduct = () => {
               </div>
             </div>
 
-
-
             <div className="mb-3">
               <label className="form-label">Image URL</label>
               <input
@@ -118,7 +114,7 @@ const CreateProduct = () => {
             </div>
 
             <div className="col-2 m-auto">
-                <button type="submit" className="btn btn-primary mb-4 ">Add</button>
+                <button type="submit" className="btn btn-primary  w-100 mb-4 ">Add</button>
             </div>
 
           </form>
