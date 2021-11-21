@@ -1,118 +1,132 @@
-import axios from 'axios';
-import React, {useState, useEffect} from 'react'
-// import { createProduct } from '../store/actions/productCatalogActions';
-
-const initialFieldVaules = {
-  name: '',
-  description: '',
-  price: 0,
-  imageName: '',
-  imageUrl: null,
-  subcategoryid: 0
-}
-
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { createProduct } from '../store/actions/productCatalogActions';
 
 const CreateProduct = () => {
 
-  const [values, setValues] = useState(initialFieldVaules)
+  const dispatch = useDispatch();
 
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]:value
-    })
+  const [values, setValues] = useState({
+    name: '',
+    description: '',
+    price: 0,
+    imageUrl: '',
+    subCategoryId: 0
+  })
+
+  const handleName = (e) => {
+    setValues({...values, name: e.target.value})
   }
 
-  const showPreview = e => {
-    if(e.target.files && e.target.files[0]) {
-      let imageFile = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = x => {
-        setValues({
-          ...values,
-          imageFile
-        })
-      }
-      reader.readAsDataURL(imageFile)
-    } else {
-      setValues({
-        ...values,
-        imageFile: null
-      })
-    }
-
+  const handleDescription = (e) => {
+    setValues({...values, description: e.target.value})
   }
 
-  const webApi = (url = 'https://ecom-webapii.azurewebsites.net/api/Products') => {
-    return {
-      fetchAll: () => axios.get(url),
-      create: newProduct => axios.post(url, newProduct)
-    }
+
+
+  const handleImageUrl = (e) => {
+    setValues({...values, imageUrl: e.target.value})
   }
 
-  const addProduct = (formData) => {
-    webApi().create(formData)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => console.log(err))
+  const handlePrice = (e) => {
+    setValues({...values, price: parseInt(e.target.value)})
   }
 
-  const handleFormSubmit = e => {
+  const handleSubCategoryId = (e) => {
+    setValues({...values, subCategoryId: parseInt (e.target.value)})
+  }
+
+  const submitHandler = (e) => {
     e.preventDefault();
-    // if(validate())
-    const formData = new FormData()
-    formData.append('name', values.name)
-    formData.append('description', values.description)
-    formData.append('price', values.price)
-    formData.append('subcategoryid', values.subcategoryid)
-    formData.append('imageUrl', values.imageUrl)
-    addProduct(formData);
-  }
+
+        let newProduct = {
+          name: values.name,
+          description: values.description,
+
+          price: values.price,
+          imageUrl: values.imageUrl,
+          subCategoryId: values.subCategoryId
+        }
+
+        console.log(newProduct)
+        dispatch(createProduct(newProduct))
+        console.log('Product Created!')
+        setValues({...values, name: "", description: "", imageUrl: "", price: "", subCategoryId: ""})
+      }
+
+      return (
+        <div className="reg-new-product mt-5">
+          <form className="col-6 m-auto p-3 mb-5 " id="formReg" onSubmit={submitHandler}>
+            <div className="text-center ">
+                    <h2 className="m-auto mb-3 pb-2 add-new-product col-7">Create New Product</h2>
+            </div>
+            <div className="row mb-3">
+              <div className="col-6">
+                <div className="">
+                  <label className="form-label">Name</label>
+                  <input
+                    onChange={handleName}
+                    type="text"
+                    id="title"
+                    className="form-control"
+                    value={values.name} />
+
+                </div>
+              </div>
+              </div>
+
+            <div className="row mb-3">
+              <div className="col">
+                <label className="form-label">Description</label>
+                <input
+                  onChange={handleDescription}
+                  type="text"
+                  id="color"
+                  className="form-control"
+                  value={values.description} />
+              </div>
+              <div className="col">
+                <label className="form-label">Price</label>
+                <input
+                  onChange={handlePrice}
+                  type="number"
+                  id="price"
+                  className="form-control"
+                  value={values.price} />
+              </div>
+            </div>
 
 
-  return (
 
-    <div>
-      <form autoComplete="off" noValidate onSubmit={handleFormSubmit}>
-        <input onChange={handleInputChange} className="form-control" type="text" placeholder="Product Name" name="name" value={values.name} />
-        <input onChange={handleInputChange} className="form-control" type="text" placeholder="Product Description" name="description" value={values.description} />
-        <input onChange={handleInputChange} className="form-control" type="text" placeholder="Product Price" name="price" value={values.price} />
-        <input onChange={handleInputChange} className="form-control" type="text" placeholder="SubCategory ID" name="subcategoryid" value={values.subcategoryid} />
-        <input onChange={showPreview} className="form-control-file" type="file" accept="image/*" name="imageUrl" value={values.imageUrl} />
-        <button>Submit</button>
-      </form>
-    </div>
+            <div className="mb-3">
+              <label className="form-label">Image URL</label>
+              <input
+                onChange={handleImageUrl}
+                type="text"
+                id="img"
+                className="form-control"
+                value={values.imageUrl} />
+            </div>
 
-    // <>
-    // <div className="container text-center">
-    //   <p>Add Product</p>
-    // </div>
-    // <form autoComplete="off" noValidate onSubmit={handleFormSubmit}>
-    //   <div className="card">
-    //     <div className="card-body">
-    //       <div className="form-group">
-    //         <input type="file" accept="image/*" className="form-control-file" />
-    //       </div>
-    //       <div className="form-group">
-    //         <input className="form-control" placeholder="Product Name" name="name" value={values.name} onChange={handleInputChange} />
-    //       </div>
-    //       <div className="form-group">
-    //         <input className="form-control" placeholder="Product Description" name="description" value={values.description} onChange={handleInputChange} />
-    //       </div>
-    //       <div className="form-group">
-    //         <input className="form-control" placeholder="Product Price" name="price" value={values.price} onChange={handleInputChange} />
-    //       </div>
-    //       <div className="form-group">
-    //         <input className="form-control" placeholder="Product SubCategory" name="subcategoryid" value={values.subcategoryid} onChange={handleInputChange} />
-    //       </div>
-    //       <button className="btn btn-primary" type="submit">Add Product</button>
-    //     </div>
-    //   </div>
-    // </form>
-    // </>
-  )
-}
+            <div className="mb-3">
+              <label className="form-label">Sub Category</label>
+              <input
+                onChange={handleSubCategoryId}
+                type="number"
+                id="subCategoriesId"
+                className="form-control"
+                value={values.subCategoryId} />
+            </div>
+
+            <div className="col-2 m-auto">
+                <button type="submit" className="btn btn-primary mb-4 ">Add</button>
+            </div>
+
+          </form>
+        </div>
+      )
+      }
+
+
 
 export default CreateProduct

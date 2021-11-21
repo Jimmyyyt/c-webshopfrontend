@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { detailsProduct } from '../store/actions/productCatalogActions'
 
 import { useParams } from 'react-router'
+import { addToCart } from '../store/actions/cartActions'
 
 const ProductDetails = () => {
 
@@ -31,7 +32,7 @@ const ProductDetails = () => {
         <h2>{product.name}</h2>
         <h4>{product.price}:-</h4>
         <input type="number" value="1" />
-        <button className="btnn btnn-explore">Add To Cart</button>
+        <button className="btnn btnn-explore" onClick={() => {dispatch(addToCart(product))}}>Add To Cart</button>
         <h3>Product Description <i className="fa fa-indent"></i></h3>
         <br />
         <p>{product.description}.</p>
