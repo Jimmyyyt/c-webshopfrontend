@@ -12,7 +12,7 @@ const ProductCard = ({product}) => {
   return (
     <div className="small-container">
       <Link to={`/products/${product.id}`}>
-      <div className="col mt-5">
+      <div className="col col-productcard mt-5">
       <p className="text-muted p-2">{product.subCategory.category.name} {`>`} {product.subCategory.name}</p>
       <div className="card h-100">
         <img

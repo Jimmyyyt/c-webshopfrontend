@@ -22,8 +22,6 @@ const CreateProduct = () => {
     setValues({...values, description: e.target.value})
   }
 
-
-
   const handleImageUrl = (e) => {
     setValues({...values, imageUrl: e.target.value})
   }
@@ -38,6 +36,7 @@ const CreateProduct = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
 
         let newProduct = {
           name: values.name,
@@ -126,7 +125,6 @@ const CreateProduct = () => {
         </div>
       )
       }
-
 
 
 export default CreateProduct

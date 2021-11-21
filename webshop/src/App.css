@@ -206,7 +206,7 @@ h4 {
   color: #ff523b;
 }
 
-.col:hover {
+.col-productcard:hover {
   transform: translateY(-0.313rem) !important;
   box-shadow: 0 0 11px rgba(33,33,33,.2);
   cursor: pointer;

@@ -38,15 +38,14 @@ export const detailsProduct = (id) => async dispatch => {
   }
 }
 
-export const createProduct = () => async (dispatch) => {
-  dispatch({ type: PRODUCT_DETAILS_REQUEST });
-    try {
-      const { data } = await axios.post('https://ecom-webapii.azurewebsites.net/api/Products/')
-      dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data.product})
-    } catch (error) {
-      const message = error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
-      dispatch({ type: PRODUCT_CREATE_FAIL, payload: message })
-    }
+export const createProduct = (data) => {
+  return async dispatch => {
+    console.log(data)
+
+    await axios.post('https://ecom-webapii.azurewebsites.net/api/Products', data)
+    console.log('Product created successfully')
+    dispatch(getProductCatalog())
+  }
 }
+
+

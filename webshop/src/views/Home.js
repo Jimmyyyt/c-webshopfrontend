@@ -15,7 +15,7 @@ const Home = () => {
   }, [dispatch])
 
   return (
-    <div className="roww row-cols-md-2 row-cols-sm-2 row-cols-lg-4 ">
+    <div className="row row-cols-md-2 row-cols-sm-2 row-cols-lg-4 ">
 
           {
             productCatalog && productCatalog.map(product => (
